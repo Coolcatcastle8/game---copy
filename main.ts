@@ -58,11 +58,7 @@ mp.onButtonEvent(mp.MultiplayerButton.Right, ControllerButtonEvent.Pressed, func
     }
 })
 function weapons () {
-    if (gameState == "gaming") {
-        if (mp.getPlayerState(player2, MultiplayerState.Cclass) == 1) {
-        	
-        }
-    }
+	
 }
 mp.onButtonEvent(mp.MultiplayerButton.Right, ControllerButtonEvent.Released, function (player2) {
     if (gameState == "gaming") {
@@ -79,30 +75,33 @@ mp.onButtonEvent(mp.MultiplayerButton.A, ControllerButtonEvent.Pressed, function
         }
     }
     if (gameState == "gaming" && mp.getPlayerState(player2, MultiplayerState.Cclass) == 1) {
-        if (characterAnimations.matchesRule(mp.getPlayerSprite(player2), characterAnimations.rule(Predicate.MovingLeft)) || characterAnimations.matchesRule(mp.getPlayerSprite(player2), characterAnimations.rule(Predicate.FacingLeft))) {
-            bullet_projectile = sprites.createProjectileFromSprite(img`
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . 5 5 5 5 5 5 5 5 5 5 5 . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                . . . . . . . . . . . . . . . . 
-                `, mp.getPlayerSprite(player2), -500, 0)
-            bullet_projectile.setKind(SpriteKind.bproj)
-        }
-        if (characterAnimations.matchesRule(mp.getPlayerSprite(player2), characterAnimations.rule(Predicate.MovingRight)) || characterAnimations.matchesRule(mp.getPlayerSprite(player2), characterAnimations.rule(Predicate.FacingRight))) {
-            bullet_projectile = sprites.createProjectileFromSprite(assets.image`bullet projectile`, mp.getPlayerSprite(player2), 500, 0)
-            bullet_projectile.setKind(SpriteKind.bproj)
+        while (mp.isButtonPressed(player2, mp.MultiplayerButton.A)) {
+            if (characterAnimations.matchesRule(mp.getPlayerSprite(player2), characterAnimations.rule(Predicate.MovingLeft)) || characterAnimations.matchesRule(mp.getPlayerSprite(player2), characterAnimations.rule(Predicate.FacingLeft))) {
+                bullet_projectile = sprites.createProjectileFromSprite(img`
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . 5 5 5 5 5 5 5 5 5 5 5 . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    . . . . . . . . . . . . . . . . 
+                    `, mp.getPlayerSprite(player2), -500, 0)
+                bullet_projectile.setKind(SpriteKind.bproj)
+            }
+            if (characterAnimations.matchesRule(mp.getPlayerSprite(player2), characterAnimations.rule(Predicate.MovingRight)) || characterAnimations.matchesRule(mp.getPlayerSprite(player2), characterAnimations.rule(Predicate.FacingRight))) {
+                bullet_projectile = sprites.createProjectileFromSprite(assets.image`bullet projectile`, mp.getPlayerSprite(player2), 500, 0)
+                bullet_projectile.setKind(SpriteKind.bproj)
+            }
+            pause(500)
         }
     }
 })
