@@ -13,25 +13,6 @@ namespace MultiplayerState {
 function intermission () {
     gameState = "intermission"
 }
-mp.onButtonEvent(mp.MultiplayerButton.Left, ControllerButtonEvent.Released, function (player2) {
-    if (gameState == "gaming") {
-        characterAnimations.clearCharacterState(mp.getPlayerSprite(player2))
-        characterAnimations.setCharacterState(mp.getPlayerSprite(player2), characterAnimations.rule(Predicate.FacingLeft))
-    }
-})
-sprites.onOverlap(SpriteKind.bproj, SpriteKind.Enemy, function (sprite, otherSprite) {
-    sprites.destroy(otherSprite)
-    sprites.destroy(sprite)
-})
-mp.onButtonEvent(mp.MultiplayerButton.B, ControllerButtonEvent.Pressed, function (player2) {
-    if (gameState == "characterselection") {
-        if (mp.getPlayerState(player2, MultiplayerState.Ready) == 1) {
-            readyplayers += -1
-            mp.setPlayerState(player2, MultiplayerState.Ready, 0)
-            shownotready()
-        }
-    }
-})
 controller.player4.onEvent(ControllerEvent.Connected, function () {
     mp.setPlayerSprite(mp.playerSelector(mp.PlayerNumber.Four), sprites.create(assets.image`ss`, SpriteKind.Player))
     mp.getPlayerSprite(mp.playerSelector(mp.PlayerNumber.Four)).setPosition(120, 100)
@@ -47,25 +28,9 @@ function gaming () {
     pause(1000)
     wave1()
 }
-mp.onButtonEvent(mp.MultiplayerButton.Right, ControllerButtonEvent.Pressed, function (player2) {
-    if (gameState == "characterselection") {
-        mp.getPlayerSprite(player2).setImage(assets.image`sc`)
-        mp.setPlayerState(player2, MultiplayerState.Cclass, 2)
-    }
-    if (gameState == "gaming") {
-        characterAnimations.clearCharacterState(mp.getPlayerSprite(player2))
-        characterAnimations.setCharacterState(mp.getPlayerSprite(player2), characterAnimations.rule(Predicate.MovingRight))
-    }
-})
 function weapons () {
 	
 }
-mp.onButtonEvent(mp.MultiplayerButton.Right, ControllerButtonEvent.Released, function (player2) {
-    if (gameState == "gaming") {
-        characterAnimations.clearCharacterState(mp.getPlayerSprite(player2))
-        characterAnimations.setCharacterState(mp.getPlayerSprite(player2), characterAnimations.rule(Predicate.FacingRight))
-    }
-})
 mp.onButtonEvent(mp.MultiplayerButton.A, ControllerButtonEvent.Pressed, function (player2) {
     if (gameState == "characterselection") {
         if (mp.getPlayerState(player2, MultiplayerState.Ready) == 0) {
@@ -76,6 +41,7 @@ mp.onButtonEvent(mp.MultiplayerButton.A, ControllerButtonEvent.Pressed, function
     }
     if (gameState == "gaming" && mp.getPlayerState(player2, MultiplayerState.Cclass) == 1) {
         while (mp.isButtonPressed(player2, mp.MultiplayerButton.A)) {
+            music.play(music.melodyPlayable(music.beamUp), music.PlaybackMode.InBackground)
             if (characterAnimations.matchesRule(mp.getPlayerSprite(player2), characterAnimations.rule(Predicate.MovingLeft)) || characterAnimations.matchesRule(mp.getPlayerSprite(player2), characterAnimations.rule(Predicate.FacingLeft))) {
                 bullet_projectile = sprites.createProjectileFromSprite(img`
                     . . . . . . . . . . . . . . . . 
@@ -105,9 +71,47 @@ mp.onButtonEvent(mp.MultiplayerButton.A, ControllerButtonEvent.Pressed, function
         }
     }
 })
+mp.onButtonEvent(mp.MultiplayerButton.Right, ControllerButtonEvent.Released, function (player2) {
+    if (gameState == "gaming") {
+        characterAnimations.clearCharacterState(mp.getPlayerSprite(player2))
+        characterAnimations.setCharacterState(mp.getPlayerSprite(player2), characterAnimations.rule(Predicate.FacingRight))
+    }
+})
 function weapon2 () {
 	
 }
+controller.menu.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (gameState == "characterselection") {
+        if (readyplayers > 0) {
+            if (mp.getPlayerState(mp.playerSelector(mp.PlayerNumber.One), MultiplayerState.Ready) == 0) {
+                sprites.destroy(mp.getPlayerSprite(mp.playerSelector(mp.PlayerNumber.One)))
+            }
+            if (mp.getPlayerState(mp.playerSelector(mp.PlayerNumber.Two), MultiplayerState.Ready) == 0) {
+                sprites.destroy(mp.getPlayerSprite(mp.playerSelector(mp.PlayerNumber.Two)))
+            }
+            if (mp.getPlayerState(mp.playerSelector(mp.PlayerNumber.Three), MultiplayerState.Ready) == 0) {
+                sprites.destroy(mp.getPlayerSprite(mp.playerSelector(mp.PlayerNumber.Three)))
+            }
+            if (mp.getPlayerState(mp.playerSelector(mp.PlayerNumber.Four), MultiplayerState.Ready) == 0) {
+                sprites.destroy(mp.getPlayerSprite(mp.playerSelector(mp.PlayerNumber.Four)))
+            }
+            gaming()
+        } else if (listen == 1) {
+            game.splash("press A to Ready up.")
+            listen = 2
+        } else if (listen == 2) {
+            game.splash("bro at LEAST ONE.")
+            listen = 3
+        } else if (listen == 3) {
+            game.splash("...okay then.")
+            game.splash("just hang out here, I guess.")
+        } else {
+            game.splash("insufficient players!")
+            game.splash("one or more okay?")
+            listen = 1
+        }
+    }
+})
 function hpbar () {
 	
 }
@@ -115,9 +119,15 @@ function hpbar () {
 function enemies () {
     enemylist = [assets.image`babydino`]
 }
-controller.player3.onEvent(ControllerEvent.Connected, function () {
-    mp.setPlayerSprite(mp.playerSelector(mp.PlayerNumber.Three), sprites.create(assets.image`ss`, SpriteKind.Player))
-    mp.getPlayerSprite(mp.playerSelector(mp.PlayerNumber.Three)).setPosition(40, 100)
+mp.onButtonEvent(mp.MultiplayerButton.Left, ControllerButtonEvent.Released, function (player2) {
+    if (gameState == "gaming") {
+        characterAnimations.clearCharacterState(mp.getPlayerSprite(player2))
+        characterAnimations.setCharacterState(mp.getPlayerSprite(player2), characterAnimations.rule(Predicate.FacingLeft))
+    }
+})
+sprites.onOverlap(SpriteKind.bproj, SpriteKind.Enemy, function (sprite, otherSprite) {
+    sprites.destroy(otherSprite)
+    sprites.destroy(sprite)
 })
 // shows if a player is Ready to start
 function showready () {
@@ -208,6 +218,16 @@ function showready () {
         }
     }
 }
+mp.onButtonEvent(mp.MultiplayerButton.Left, ControllerButtonEvent.Pressed, function (player2) {
+    if (gameState == "characterselection") {
+        mp.setPlayerState(player2, MultiplayerState.Cclass, 1)
+        mp.getPlayerSprite(player2).setImage(assets.image`ss`)
+    }
+    if (gameState == "gaming") {
+        characterAnimations.clearCharacterState(mp.getPlayerSprite(player2))
+        characterAnimations.setCharacterState(mp.getPlayerSprite(player2), characterAnimations.rule(Predicate.MovingLeft))
+    }
+})
 function ss1 () {
 	
 }
@@ -347,47 +367,35 @@ function wave1 () {
         pause(2000)
     }
 }
-controller.menu.onEvent(ControllerButtonEvent.Pressed, function () {
+mp.onButtonEvent(mp.MultiplayerButton.Right, ControllerButtonEvent.Pressed, function (player2) {
     if (gameState == "characterselection") {
-        if (readyplayers > 0) {
-            if (mp.getPlayerState(mp.playerSelector(mp.PlayerNumber.One), MultiplayerState.Ready) == 0) {
-                sprites.destroy(mp.getPlayerSprite(mp.playerSelector(mp.PlayerNumber.One)))
-            }
-            if (mp.getPlayerState(mp.playerSelector(mp.PlayerNumber.Two), MultiplayerState.Ready) == 0) {
-                sprites.destroy(mp.getPlayerSprite(mp.playerSelector(mp.PlayerNumber.Two)))
-            }
-            if (mp.getPlayerState(mp.playerSelector(mp.PlayerNumber.Three), MultiplayerState.Ready) == 0) {
-                sprites.destroy(mp.getPlayerSprite(mp.playerSelector(mp.PlayerNumber.Three)))
-            }
-            if (mp.getPlayerState(mp.playerSelector(mp.PlayerNumber.Four), MultiplayerState.Ready) == 0) {
-                sprites.destroy(mp.getPlayerSprite(mp.playerSelector(mp.PlayerNumber.Four)))
-            }
-            gaming()
-        } else if (listen == 1) {
-            game.splash("press A to Ready up.")
-            listen = 2
-        } else if (listen == 2) {
-            game.splash("bro at LEAST ONE.")
-            listen = 3
-        } else if (listen == 3) {
-            game.splash("...okay then.")
-            game.splash("just hang out here, I guess.")
-        } else {
-            game.splash("insufficient players!")
-            game.splash("one or more okay?")
-            listen = 1
-        }
-    }
-})
-mp.onButtonEvent(mp.MultiplayerButton.Left, ControllerButtonEvent.Pressed, function (player2) {
-    if (gameState == "characterselection") {
-        mp.setPlayerState(player2, MultiplayerState.Cclass, 1)
-        mp.getPlayerSprite(player2).setImage(assets.image`ss`)
+        mp.getPlayerSprite(player2).setImage(assets.image`sc`)
+        mp.setPlayerState(player2, MultiplayerState.Cclass, 2)
     }
     if (gameState == "gaming") {
         characterAnimations.clearCharacterState(mp.getPlayerSprite(player2))
-        characterAnimations.setCharacterState(mp.getPlayerSprite(player2), characterAnimations.rule(Predicate.MovingLeft))
+        characterAnimations.setCharacterState(mp.getPlayerSprite(player2), characterAnimations.rule(Predicate.MovingRight))
     }
+})
+// first block fixes a VERY annoying bug from the multiplayer extension.
+mp.onControllerEvent(ControllerEvent.Connected, function (player2) {
+    mp.setPlayerState(player2, 100, 0)
+    mp.setPlayerState(player2, MultiplayerState.Cclass, 1)
+    mp.setPlayerState(player2, MultiplayerState.Level, 1)
+    mp.setPlayerState(player2, MultiplayerState.Ready, 0)
+})
+mp.onButtonEvent(mp.MultiplayerButton.B, ControllerButtonEvent.Pressed, function (player2) {
+    if (gameState == "characterselection") {
+        if (mp.getPlayerState(player2, MultiplayerState.Ready) == 1) {
+            readyplayers += -1
+            mp.setPlayerState(player2, MultiplayerState.Ready, 0)
+            shownotready()
+        }
+    }
+})
+controller.player2.onEvent(ControllerEvent.Connected, function () {
+    mp.setPlayerSprite(mp.playerSelector(mp.PlayerNumber.Two), sprites.create(assets.image`ss`, SpriteKind.Player))
+    mp.getPlayerSprite(mp.playerSelector(mp.PlayerNumber.Two)).setPosition(120, 20)
 })
 // shows if a player is not Ready
 function shownotready () {
@@ -696,16 +704,9 @@ function characterselection () {
     mp.setPlayerSprite(mp.playerSelector(mp.PlayerNumber.One), sprites.create(assets.image`ss`, SpriteKind.Player))
     mp.getPlayerSprite(mp.playerSelector(mp.PlayerNumber.One)).setPosition(40, 20)
 }
-controller.player2.onEvent(ControllerEvent.Connected, function () {
-    mp.setPlayerSprite(mp.playerSelector(mp.PlayerNumber.Two), sprites.create(assets.image`ss`, SpriteKind.Player))
-    mp.getPlayerSprite(mp.playerSelector(mp.PlayerNumber.Two)).setPosition(120, 20)
-})
-// first block fixes a VERY annoying bug from the multiplayer extension.
-mp.onControllerEvent(ControllerEvent.Connected, function (player2) {
-    mp.setPlayerState(player2, 100, 0)
-    mp.setPlayerState(player2, MultiplayerState.Cclass, 1)
-    mp.setPlayerState(player2, MultiplayerState.Level, 1)
-    mp.setPlayerState(player2, MultiplayerState.Ready, 0)
+controller.player3.onEvent(ControllerEvent.Connected, function () {
+    mp.setPlayerSprite(mp.playerSelector(mp.PlayerNumber.Three), sprites.create(assets.image`ss`, SpriteKind.Player))
+    mp.getPlayerSprite(mp.playerSelector(mp.PlayerNumber.Three)).setPosition(40, 100)
 })
 let babydino: Sprite = null
 let spawns: number[] = []
@@ -847,14 +848,15 @@ scene.setBackgroundImage(img`
 let ok = true
 listen = 0
 readyplayers = 0
+music.setVolume(100)
 game.showLongText("Player 1, press menu to start after selection!", DialogLayout.Center)
 enemies()
 characterselection()
-forever(function () {
-	
-})
 game.onUpdateInterval(500, function () {
     if (gameState == "gaming") {
     	
     }
+})
+forever(function () {
+	
 })
