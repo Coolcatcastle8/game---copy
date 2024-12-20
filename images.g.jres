@@ -4,11 +4,6 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "heroWalkSideLeft3"
     },
-    "image4": {
-        "data": "hwQQABAAAAAAAAAAAAAAAAAAIiIAAAAAACL//wIAAAAg////LyIiAPL///////8C8v/////////y//////////L/////////8v/////////y////////AiD/////LyIAIP////8CAAAAIiL/LwAAAAAAACICAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-        "mimeType": "image/x-mkcd-f4",
-        "displayName": "heroWalkSideLeft1"
-    },
     "image5": {
         "data": "hwQQABAAAAAAAAAAAAAAAAAAiIgAAAAAAIj//wgAAACA////j4iIAPj///////8I+P/////////4//////////j/////////+P/////////4////////CID/////j4gAgP////8IAAAAiIj/jwAAAAAAAIgIAAAAAAAAAAAAAAAAAAAAAAAAAA==",
         "mimeType": "image/x-mkcd-f4",
@@ -20,9 +15,39 @@
         "displayName": "heroWalkSideLeft0"
     },
     "image3": {
-        "data": "hwQQABAAAAAAAAAAAAAAAAAAICICAAAAACDy/y8gIgAA8v////IvACD//////y8iIP/////////y//////////L///////8P8v///////w/y/////////yD/////////IP//////LyIA8v////IvAAAg8v8vICIAAAAgIgIAAAAAAAAAAAAAAA==",
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAICICAAAAACDy/yIgIgAA8iLyIvIvACD/IvIi/y8iIP8i8iLy///y/yLyIiL///L/Iv8iIvIP8v8i/yIi8g/y/yLyIiL//yD/IvIi8v//IP8i8iL/LyIA8iLyIvIvAAAg8v8iICIAAAAgIgIAAAAAAAAAAAAAAA==",
         "mimeType": "image/x-mkcd-f4",
-        "displayName": "myImage"
+        "displayName": "ss"
+    },
+    "image6": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAgIgIAAAAAID4/4+AiAAAiI+I+PiPAICPj4/4+I+IgI+P//j4///4j4//+IiI/4iPj/j4//8PiI+P+Pj//w/4j4//+IiI/4CPj//4+P//gI+Pj/j4j4gAiI+I+PiPAACA+P+PgIgAAACAiAgAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "sc"
+    },
+    "image4": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAIiIAAAAAACIiLyIAAAAgLyIvIiIiAPIvIi8i8v8C8i8iLyL////yL/Iv8v////Iv/y//////8i//L//////yL/8v////AiAv/y//LyIAIC//L/8CAAAAIiIvIgAAAAAAACICAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "heroWalkSideLeft1"
+    },
+    "image9": {
+        "data": "hwQRABEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJCZmZkAAAAAAAAAAJmZmZkJAAAAAAAAkJmZmZmZAAAAAAAAkJmZmZmZAAAAAAAAkJmZmZmZAAAAAAAAkJmZmZmZAAAAAAAAkJmZmZmZAAAAAAAAkJmZmZmZAAAAAAAAkJmZmZmZAAAAAAAAAJmZmZkJAAAAAAAAAJCZmZkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "piercing projectile"
+    },
+    "image10": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAAAAAAAAAFAAAAAAAAAAUAAAAAAAAABQAAAAAAAAAFAAAAAAAAAAUAAAAAAAAABQAAAAAAAAAFAAAAAAAAAAUAAAAAAAAABQAAAAAAAAAFAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "bullet projectile"
+    },
+    "image7": {
+        "data": "hwQQABAAAAAAAMzMDAAAAADAVcW1wAwAAFxVtVO8DMwAXFW1U7vMvMBVVRVTy8y8wFVVtVVczLzAVfFVVVXMzMBV/1VVtd3bAFxVVVW7XVUAXFVVVd1dVQDAVVXd3b27AABcVd3d3cwAAMDc3d3dDAAAAMDMzN0MAAAAAADczQAAAAAAAMAMAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "babydino"
+    },
+    "image8": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//wAAAAAAAB/xAAAAAAAAH/EAAAAAAAAf8QAAAAAAAB/xAAAAAAAAH/EAAAAAAAAf8f8AAAAAAB8R8f8AAAAAHxER8f8AAAAf/x8R8QAAAP8P/x/xAAAAAAAA//8AAAAAAAAAAAAAAAAAAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "glock1"
     },
     "*": {
         "mimeType": "image/x-mkcd-f4",

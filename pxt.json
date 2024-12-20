@@ -1,5 +1,5 @@
 {
-    "name": "game - Copy",
+    "name": "game  - Copy - Copy",
     "description": "",
     "dependencies": {
         "device": "*",
@@ -10,7 +10,10 @@
         "multiplayer": "*",
         "controller": "*",
         "arcade-sprite-data": "github:microsoft/arcade-sprite-data#v0.2.1",
-        "arcade-character-animations": "github:microsoft/arcade-character-animations#v0.0.2"
+        "arcade-character-animations": "github:microsoft/arcade-character-animations#v0.0.2",
+        "animation": "*",
+        "darts": "*",
+        "arcade-text": "github:microsoft/arcade-text#v1.3.0"
     },
     "files": [
         "main.blocks",
